@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1480" viewBox="0 0 2000 1480" role="img" aria-labelledby="title desc">
+<title id="title">Fantasy Football Recommender: detailed system architecture</title>
+<desc id="desc">Two flows: an interactive web request through the API and recommendation modules to a validated snapshot, and a scheduled ingestion path through provider adapters, validation, staging, and atomic publication. Manual roster entry and stale-data warnings are shown.</desc>
+<defs><marker id="arr" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M1 1 L10 5.5 L1 10" fill="none" stroke="#4969a2" stroke-width="1.8"/></marker><marker id="arr2" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M1 1 L10 5.5 L1 10" fill="none" stroke="#17a18a" stroke-width="1.8"/></marker></defs>
+<rect x="0" y="0" width="2000" height="1480" rx="0" fill="#f5f8fc" stroke="#f5f8fc" stroke-width="0"/>
+<text x="66" y="70" font-family="Arial, Helvetica, sans-serif" font-size="42" fill="#14273e" font-weight="700">Fantasy Football Recommender</text>
+<text x="66" y="108" font-family="Arial, Helvetica, sans-serif" font-size="21" fill="#566980" font-weight="400">V1 system architecture  •  modular backend, scheduled data refresh, beginner-friendly explanations</text>
+<rect x="45" y="145" width="1910" height="560" rx="24" fill="#eaf1fb" stroke="#d4e2f4" stroke-width="2"/>
+<text x="68" y="182" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#345a91" font-weight="700">01   INTERACTIVE REQUEST   •   HTTPS / JSON</text>
+<text x="68" y="207" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#526783" font-weight="400">User actions read a published snapshot; external data providers are outside the recommendation request.</text>
+<rect x="70" y="255" width="330" height="195" rx="18" fill="#fff" stroke="#4969a2" stroke-width="2"/>
+<rect x="70" y="255" width="7" height="195" rx="3" fill="#4969a2" stroke="#4969a2" stroke-width="0"/>
+<text x="94" y="286" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4969a2" font-weight="700">BROWSER • DESKTOP + MOBILE</text>
+<text x="94" y="323" font-family="Arial, Helvetica, sans-serif" font-size="25" fill="#15263d" font-weight="700">React + TypeScript</text>
+<text x="94" y="358" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Manual roster / league settings</text>
+<text x="94" y="384" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Start or sit / set full lineup</text>
+<text x="94" y="410" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Status, reason, glossary</text>
+<rect x="465" y="255" width="355" height="195" rx="18" fill="#fff" stroke="#4969a2" stroke-width="2"/>
+<rect x="465" y="255" width="7" height="195" rx="3" fill="#4969a2" stroke="#4969a2" stroke-width="0"/>
+<text x="489" y="286" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4969a2" font-weight="700">APPLICATION EDGE</text>
+<text x="489" y="323" font-family="Arial, Helvetica, sans-serif" font-size="25" fill="#15263d" font-weight="700">FastAPI + Python</text>
+<text x="489" y="358" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Sessions + ownership checks</text>
+<text x="489" y="384" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Validate input; rate limit</text>
+<text x="489" y="410" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Roster edits + import endpoint</text>
+<rect x="885" y="255" width="465" height="195" rx="18" fill="#fff" stroke="#4969a2" stroke-width="2"/>
+<rect x="885" y="255" width="7" height="195" rx="3" fill="#4969a2" stroke="#4969a2" stroke-width="0"/>
+<text x="909" y="286" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4969a2" font-weight="700">BACKEND MODULES • SAME APP</text>
+<text x="909" y="323" font-family="Arial, Helvetica, sans-serif" font-size="25" fill="#15263d" font-weight="700">Recommendation engine</text>
+<text x="909" y="358" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Canonical IDs + scoring rules</text>
+<text x="909" y="384" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Projection + uncertainty</text>
+<text x="909" y="410" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Slot eligibility + lineup solver</text>
+<rect x="1415" y="255" width="475" height="195" rx="18" fill="#f8fdfb" stroke="#17836e" stroke-width="2"/>
+<rect x="1415" y="255" width="7" height="195" rx="3" fill="#17836e" stroke="#17836e" stroke-width="0"/>
+<text x="1439" y="286" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#17836e" font-weight="700">PERSISTENCE</text>
+<text x="1439" y="323" font-family="Arial, Helvetica, sans-serif" font-size="25" fill="#15263d" font-weight="700">Managed PostgreSQL</text>
+<text x="1439" y="358" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Users, leagues, roster versions</text>
+<text x="1439" y="384" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Players, scoring + week history</text>
+<text x="1439" y="410" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Active validated snapshot ID</text>
+<rect x="885" y="520" width="465" height="145" rx="18" fill="#fff" stroke="#4969a2" stroke-width="2"/>
+<rect x="885" y="520" width="7" height="145" rx="3" fill="#4969a2" stroke="#4969a2" stroke-width="0"/>
+<text x="909" y="551" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4969a2" font-weight="700">BACKEND MODULE • SAME APP</text>
+<text x="909" y="588" font-family="Arial, Helvetica, sans-serif" font-size="25" fill="#15263d" font-weight="700">Explanation + glossary</text>
+<text x="909" y="623" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Facts from chosen lineup; 1–2 sentences</text>
+<text x="909" y="649" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Source age and uncertainty shown</text>
+<rect x="465" y="520" width="355" height="145" rx="18" fill="#fff" stroke="#4969a2" stroke-width="2"/>
+<rect x="465" y="520" width="7" height="145" rx="3" fill="#4969a2" stroke="#4969a2" stroke-width="0"/>
+<text x="489" y="551" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4969a2" font-weight="700">API RESPONSE</text>
+<text x="489" y="588" font-family="Arial, Helvetica, sans-serif" font-size="25" fill="#15263d" font-weight="700">Recommendation result</text>
+<text x="489" y="623" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Valid lineup or close call</text>
+<text x="489" y="649" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Warnings + plain-English reasons</text>
+<rect x="1415" y="520" width="475" height="145" rx="18" fill="#fffbf3" stroke="#bd7523" stroke-width="2"/>
+<rect x="1415" y="520" width="7" height="145" rx="3" fill="#bd7523" stroke="#bd7523" stroke-width="0"/>
+<text x="1439" y="551" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#bd7523" font-weight="700">DEGRADED DATA POLICY</text>
+<text x="1439" y="588" font-family="Arial, Helvetica, sans-serif" font-size="25" fill="#15263d" font-weight="700">Freshness guard</text>
+<text x="1439" y="623" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Serve last valid snapshot with age notice</text>
+<text x="1439" y="649" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Pause unsafe injury-dependent picks</text>
+<path d="M400 340 H465" fill="none" stroke="#4969a2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arr)"/>
+<path d="M820 340 H885" fill="none" stroke="#4969a2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arr)"/>
+<path d="M1350 340 H1415" fill="none" stroke="#17a18a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arr2)"/>
+<path d="M1120 450 V520" fill="none" stroke="#4969a2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arr)"/>
+<path d="M885 593 H820" fill="none" stroke="#4969a2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arr)"/>
+<path d="M465 593 H432 V475 H235 V450" fill="none" stroke="#4969a2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arr)"/>
+<path d="M1650 450 V520" fill="none" stroke="#17a18a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="9 6" marker-end="url(#arr2)"/>
+<path d="M1415 592 H1380 V472 H1320" fill="none" stroke="#17a18a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="9 6" marker-end="url(#arr2)"/>
+<text x="1359" y="241" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#17836e" font-weight="400">read roster + active snapshot</text>
+<text x="1525" y="483" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#95611e" font-weight="400">stale / missing status</text>
+<rect x="45" y="740" width="1910" height="530" rx="24" fill="#ecf8f5" stroke="#d3eae4" stroke-width="2"/>
+<text x="68" y="777" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#167664" font-weight="700">02   SCHEDULED REFRESH   •   SEPARATE FROM USER REQUESTS</text>
+<text x="68" y="803" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#4a6d66" font-weight="400">External sources are candidates: provider terms, commercial use, coverage, and freshness require approval.</text>
+<rect x="70" y="850" width="330" height="180" rx="18" fill="#fcfaff" stroke="#6f5caa" stroke-width="2"/>
+<rect x="70" y="850" width="7" height="180" rx="3" fill="#6f5caa" stroke="#6f5caa" stroke-width="0"/>
+<text x="94" y="881" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#6f5caa" font-weight="700">EXTERNAL PLAYER DATA</text>
+<text x="94" y="918" font-family="Arial, Helvetica, sans-serif" font-size="25" fill="#15263d" font-weight="700">Permitted NFL feed</text>
+<text x="94" y="953" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">nflverse: candidate stats/history</text>
+<text x="94" y="979" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Status source + cadence: TBD</text>
+<text x="94" y="1005" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">No live in-game updates</text>
+<rect x="465" y="850" width="355" height="180" rx="18" fill="#fcfaff" stroke="#6f5caa" stroke-width="2"/>
+<rect x="465" y="850" width="7" height="180" rx="3" fill="#6f5caa" stroke="#6f5caa" stroke-width="0"/>
+<text x="489" y="881" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#6f5caa" font-weight="700">INTEGRATION BOUNDARY</text>
+<text x="489" y="918" font-family="Arial, Helvetica, sans-serif" font-size="25" fill="#15263d" font-weight="700">Provider adapters</text>
+<text x="489" y="953" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Fetch; isolate source changes</text>
+<text x="489" y="979" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Normalize IDs and timestamps</text>
+<text x="489" y="1005" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Retry + report upstream failures</text>
+<rect x="885" y="850" width="465" height="180" rx="18" fill="#f8fdfb" stroke="#17836e" stroke-width="2"/>
+<rect x="885" y="850" width="7" height="180" rx="3" fill="#17836e" stroke="#17836e" stroke-width="0"/>
+<text x="909" y="881" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#17836e" font-weight="700">BACKGROUND PROCESS</text>
+<text x="909" y="918" font-family="Arial, Helvetica, sans-serif" font-size="25" fill="#15263d" font-weight="700">Scheduler + worker</text>
+<text x="909" y="953" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Weekly batch + permitted status refresh</text>
+<text x="909" y="979" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Transform stats / build projections</text>
+<text x="909" y="1005" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Persistent run and failure records</text>
+<rect x="1415" y="850" width="475" height="180" rx="18" fill="#f8fdfb" stroke="#17836e" stroke-width="2"/>
+<rect x="1415" y="850" width="7" height="180" rx="3" fill="#17836e" stroke="#17836e" stroke-width="0"/>
+<text x="1439" y="881" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#17836e" font-weight="700">PUBLISHING BOUNDARY</text>
+<text x="1439" y="918" font-family="Arial, Helvetica, sans-serif" font-size="25" fill="#15263d" font-weight="700">Stage + validate</text>
+<text x="1439" y="953" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Schema, mapping, counts, season/week</text>
+<text x="1439" y="979" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Compare with prior snapshot; flag gaps</text>
+<text x="1439" y="1005" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Atomic swap of active snapshot ID</text>
+<rect x="70" y="1095" width="330" height="135" rx="18" fill="#fcfaff" stroke="#6f5caa" stroke-width="2"/>
+<rect x="70" y="1095" width="7" height="135" rx="3" fill="#6f5caa" stroke="#6f5caa" stroke-width="0"/>
+<text x="94" y="1126" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#6f5caa" font-weight="700">OPTIONAL READ-ONLY IMPORT</text>
+<text x="94" y="1163" font-family="Arial, Helvetica, sans-serif" font-size="25" fill="#15263d" font-weight="700">Sleeper API candidate</text>
+<text x="94" y="1198" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">League settings + rosters</text>
+<text x="94" y="1224" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Commercial rights approval needed</text>
+<rect x="465" y="1095" width="355" height="135" rx="18" fill="#fffbf3" stroke="#bd7523" stroke-width="2"/>
+<rect x="465" y="1095" width="7" height="135" rx="3" fill="#bd7523" stroke="#bd7523" stroke-width="0"/>
+<text x="489" y="1126" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#bd7523" font-weight="700">FALLBACK</text>
+<text x="489" y="1163" font-family="Arial, Helvetica, sans-serif" font-size="25" fill="#15263d" font-weight="700">Manual roster entry</text>
+<text x="489" y="1198" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Browser → API → saved roster</text>
+<text x="489" y="1224" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Unknown IDs require review</text>
+<rect x="885" y="1095" width="465" height="135" rx="18" fill="#f8fdfb" stroke="#17836e" stroke-width="2"/>
+<rect x="885" y="1095" width="7" height="135" rx="3" fill="#17836e" stroke="#17836e" stroke-width="0"/>
+<text x="909" y="1126" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#17836e" font-weight="700">QUALITY / LEARNING LOOP</text>
+<text x="909" y="1163" font-family="Arial, Helvetica, sans-serif" font-size="25" fill="#15263d" font-weight="700">Evaluation jobs</text>
+<text x="909" y="1198" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Leakage-safe historical backtests</text>
+<text x="909" y="1224" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Baseline: platform or documented proxy</text>
+<rect x="1415" y="1095" width="475" height="135" rx="18" fill="#fffbf3" stroke="#bd7523" stroke-width="2"/>
+<rect x="1415" y="1095" width="7" height="135" rx="3" fill="#bd7523" stroke="#bd7523" stroke-width="0"/>
+<text x="1439" y="1126" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#bd7523" font-weight="700">OPERATIONS</text>
+<text x="1439" y="1163" font-family="Arial, Helvetica, sans-serif" font-size="25" fill="#15263d" font-weight="700">Health + recovery</text>
+<text x="1439" y="1198" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Refresh age / failed jobs / p95 latency</text>
+<text x="1439" y="1224" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#33465e" font-weight="400">Backups, restore drill, rollback</text>
+<path d="M400 940 H465" fill="none" stroke="#17a18a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arr2)"/>
+<path d="M820 940 H885" fill="none" stroke="#17a18a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arr2)"/>
+<path d="M1350 940 H1415" fill="none" stroke="#17a18a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arr2)"/>
+<path d="M400 1160 H430 V1000 H465" fill="none" stroke="#17a18a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="9 6" marker-end="url(#arr2)"/>
+<path d="M1415 934 H1380 V394 H1415" fill="none" stroke="#17a18a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"  marker-end="url(#arr2)"/>
+<text x="1080" y="731" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#167664" font-weight="400">publish only after checks pass</text>
+<rect x="45" y="1300" width="1910" height="125" rx="20" fill="#fff" stroke="#d6e0ea" stroke-width="2"/>
+<text x="70" y="1337" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#203a59" font-weight="700">DESIGN GUARDRAILS</text>
+<text x="70" y="1372" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#33465e" font-weight="400">Read-only platform import is gated on permission. Requests never wait on provider fetches. Ingestion never exposes partial snapshots.</text>
+<text x="70" y="1402" font-family="Arial, Helvetica, sans-serif" font-size="19" fill="#33465e" font-weight="400">Waiver and trade analysis are later modules; Redis, queues, and multiple API instances are optional after measured need.</text>
+<text x="68" y="1460" font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#61758c" font-weight="400">Legend: blue = request path     green = refresh / storage path     dashed = conditional or fallback path</text>
+</svg>
